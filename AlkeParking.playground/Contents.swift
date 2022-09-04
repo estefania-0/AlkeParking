@@ -1,5 +1,4 @@
 import Foundation
-import UIKit
 
 protocol Parkable {
     var plate: String { get }
