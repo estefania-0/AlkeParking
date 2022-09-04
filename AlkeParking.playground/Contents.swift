@@ -9,6 +9,22 @@ protocol Parkable {
     var parkedTime: Int { get }
 }
 
+enum VehicleType{
+    case car
+    case motorcycle
+    case miniBus
+    case bus
+    
+    var hourFee: Int{
+        switch self {
+        case .car: return 20
+        case .motorcycle: return 15
+        case .miniBus: return 25
+        case .bus: return 30
+        }
+    }
+}
+
 struct Parking {
     var vehicles: Set<Vehicle> = []
     let parkingLimit = 20
@@ -46,7 +62,9 @@ struct Parking {
     
     func calculateFee(type: VehicleType, parkedTime: Int, hasDiscountCard: Bool) -> Int {
         var fee = type.hourFee
-        if parkedTime > 120 {
+        let hours = 120
+        
+        if parkedTime > hours {
             let reminderMins = parkedTime - 120
             fee += Int(ceil(Double(reminderMins) / 15.0)) * 5
         }
@@ -87,22 +105,6 @@ struct Vehicle: Parkable, Hashable {
     
     func checkOutVehicle(plate: String, onSuccess: (Int) -> Int, onError: ()){
         
-    }
-}
-
-enum VehicleType{
-    case car
-    case motorcycle
-    case miniBus
-    case bus
-    
-    var hourFee: Int{
-        switch self {
-        case .car: return 20
-        case .motorcycle: return 15
-        case .miniBus: return 25
-        case .bus: return 30
-        }
     }
 }
     
@@ -149,7 +151,7 @@ let vehicles = [Vehicle(plate: "AA111AA", type: VehicleType.car,discountCard: "D
                 Vehicle(plate: "B222FFF", type: VehicleType.motorcycle, discountCard: nil),
                 Vehicle(plate: "CC333GG", type: VehicleType.miniBus, discountCard: nil),
                 Vehicle(plate: "DD444II", type: VehicleType.bus, discountCard: "DISCOUNT_CARD_010")]
- 
+
 vehicles.forEach { vehicle in
     alkeParking.checkInVehicle(vehicle) { canInsert in
         if !canInsert {
@@ -160,6 +162,9 @@ vehicles.forEach { vehicle in
         
     }
 }
+
+
+print("")
 
 //Ingresar nuevo vehiculo cuando ya existen 20
 let vehicle21 = Vehicle(plate: "AA111AB", type: VehicleType.car, discountCard: "DISCOUNT_CARD_002")
@@ -198,8 +203,7 @@ alkeParking.checkOutVehicle(plate: "AA111AA") { fee in
 //Ganancias del Parking
 alkeParking.showEarnings()
 
+print("")
+print("#######Patentes#######")
 //Listado de patentes de vehiculos existentes
 alkeParking.listVehicles()
-    
-    
-
