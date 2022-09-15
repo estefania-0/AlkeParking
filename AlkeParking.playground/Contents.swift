@@ -25,9 +25,9 @@ enum VehicleType{
 }
 
 struct Parking {
-    var vehicles: Set<Vehicle> = []
-    let parkingLimit = 20
-    var stadistics: (vehicles: Int, earnings: Int) = (0,0)
+    private var vehicles: Set<Vehicle> = []
+    private let parkingLimit = 20
+    private var stadistics: (vehicles: Int, earnings: Int) = (0,0)
     
     mutating func checkInVehicle(_ vehicle: Vehicle, onFinish: (Bool) -> Void) {
         
@@ -102,33 +102,9 @@ struct Vehicle: Parkable, Hashable {
         return lhs.plate == rhs.plate
     }
     
-    func checkOutVehicle(plate: String, onSuccess: (Int) -> Int, onError: ()){
-        
-    }
 }
     
 var alkeParking = Parking()
-
-let vehicle1 = Vehicle(plate: "AA111AA", type: VehicleType.car,discountCard: "DISCOUNT_CARD_001")
-let vehicle2 = Vehicle(plate: "B222BBB", type: VehicleType.motorcycle, discountCard: nil)
-let vehicle3 = Vehicle(plate: "CC333CC", type: VehicleType.miniBus, discountCard: nil)
-let vehicle4 = Vehicle(plate: "DD444DD", type: VehicleType.bus, discountCard: "DISCOUNT_CARD_002")
-let vehicle5 = Vehicle(plate: "AA111BB", type: VehicleType.car, discountCard: "DISCOUNT_CARD_003")
-let vehicle6 = Vehicle(plate: "B222CCC", type: VehicleType.motorcycle, discountCard: "DISCOUNT_CARD_004")
-let vehicle7 =  Vehicle(plate: "CC333DD", type: VehicleType.miniBus, discountCard: nil)
-let vehicle8 = Vehicle(plate: "DD444EE", type: VehicleType.bus, discountCard: "DISCOUNT_CARD_005")
-let vehicle9 = Vehicle(plate: "AA111CC", type: VehicleType.car, discountCard: nil)
-let vehicle10 = Vehicle(plate: "B222DDD", type: VehicleType.motorcycle, discountCard: nil)
-let vehicle11 = Vehicle(plate: "CC333EE", type: VehicleType.miniBus, discountCard: nil)
-let vehicle12 = Vehicle(plate: "DD444GG", type: VehicleType.bus, discountCard: "DISCOUNT_CARD_006")
-let vehicle13 = Vehicle(plate: "AA111DD", type: VehicleType.car, discountCard: "DISCOUNT_CARD_007")
-let vehicle14 = Vehicle(plate: "B222EEE", type: VehicleType.motorcycle, discountCard: nil)
-let vehicle15 = Vehicle(plate: "CC333FF", type: VehicleType.miniBus, discountCard: nil)
-let vehicle16 = Vehicle(plate: "DD444HH", type: VehicleType.bus, discountCard: "DISCOUNT_CARD_008")
-let vehicle17 = Vehicle(plate: "AA111EE", type: VehicleType.car, discountCard: "DISCOUNT_CARD_009")
-let vehicle18 = Vehicle(plate: "B222FFF", type: VehicleType.motorcycle, discountCard: nil)
-let vehicle19 = Vehicle(plate: "CC333GG", type: VehicleType.miniBus, discountCard: nil)
-let vehicle20 = Vehicle(plate: "DD444II", type: VehicleType.bus, discountCard: "DISCOUNT_CARD_010")
 
 let vehicles = [Vehicle(plate: "AA111AA", type: VehicleType.car,discountCard: "DISCOUNT_CARD_001"),
                 Vehicle(plate: "B222BBB", type: VehicleType.motorcycle, discountCard: nil),
